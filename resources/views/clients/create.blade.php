@@ -7,7 +7,7 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-       {{ __('constants.Client_Management') }} 
+       {{ __('constants.Client_Management') }}
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('constants.Home') }}</a></li>
@@ -24,7 +24,7 @@
             <h2>Create New Role</h2>
         </div>-->
         <div class="pull-left">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}">{{ __('constants.Back') }}</a>
+            <a class="btn btn-primary" href="{{ route('clients.index') }}">{{ __('constants.Back') }}</a>
         </div>
     </div>
 </div>
@@ -47,19 +47,31 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-           {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+           {!! Form::open(array('route' => 'clients.store','method'=>'POST')) !!}
               <div class="box-body">
                 <div class="form-group">
                   <label>{{ __('constants.Name') }}</label>
-                  {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                  {!! Form::text('name', null, array('placeholder' => __('constants.Name'),'class' => 'form-control')) !!}
                 </div>
                 <div class="form-group">
-                  <label>{{ __('constants.Permission') }}</label></br>
-                    @foreach($permission as $value)
-                    <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                    {{ $value->name }}</label>
-                    <br/>
-                    @endforeach
+                  <label>{{ __('constants.ClientOrganization') }}</label>
+                  {!! Form::text('ClientOrganization', null, array('placeholder' => __('constants.ClientOrganization'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Country') }}</label>
+                   {!! Form::select('country', $countries,[], array('placeholder' => __('constants.Country'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Region') }}</label>
+                  {!! Form::text('region', null, array('placeholder' => __('constants.Region'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Address') }}</label>
+                  {!! Form::textarea('address', null, array('placeholder' => __('constants.Address'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.OtherInformation') }}</label>
+                  {!! Form::textarea('OtherInformation', null, array('placeholder' => __('constants.OtherInformation'),'class' => 'form-control')) !!}
                 </div>
                 
               </div>
@@ -70,30 +82,7 @@
               </div>
             {!! Form::close() !!}
           </div>
-<!--{!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permission:</strong>
-            <br/>
-            @foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                {{ $value->name }}</label>
-            <br/>
-            @endforeach
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
-{!! Form::close() !!}-->
+
 </section>
 </div>
 

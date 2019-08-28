@@ -4,6 +4,7 @@ namespace BPMS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use BPMS\Client;
+use BPMS\Country;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
@@ -18,9 +19,9 @@ class ClientController extends Controller
     function __construct()
     {
          // $this->middleware('permission:client-list');
-          //$this->middleware('permission:client-create', ['only' => ['create','store']]);
-         // $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         // $this->middleware('permission:client-create', ['only' => ['create','store']]);
+         // $this->middleware('permission:client-edit', ['only' => ['edit','update']]);
+         // $this->middleware('permission:client-delete', ['only' => ['destroy']]);
     }
 
 
@@ -32,11 +33,87 @@ class ClientController extends Controller
     public function index(Request $request)
     {
         $clients = Client::orderBy('id','DESC')->paginate(5);
-        return view('clients.index',compact('clients'))
+        $countries = Country::all();
+        return view('clients.index',compact('clients','countries'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajaxrequestClient(Request $request)
+    {
+        $clientsQuery = Client::select('*','countries.name as cname','clients.name as clname','clients.id as clId')->join('countries','clients.country','=','countries.id');
+        if(isset($request->searchByRegion) && !empty($request->searchByRegion)){
+            $clientsQuery->where('clients.region','like', '%' .$request->searchByRegion. '%');
+        }
+        if(isset($request->searchByCountry) && !empty($request->searchByCountry)){
+            $clientsQuery->where('clients.country',$request->searchByCountry);
+        }
+        if(isset($request->searchByClientOrganization) && !empty($request->searchByClientOrganization)){
+            $clientsQuery->where('clients.ClientOrganization','like', '%' .$request->searchByClientOrganization. '%');
+        }
+        if(isset($request->searchByclientName) && !empty($request->searchByclientName)){
+            $clientsQuery->where('clients.name','like', '%' .$request->searchByclientName. '%');
+        }
+        $count = $clientsQuery->count();
+        $start = $request->start;
+        $operator = "plus";
+        $columnIndex = $request->order[0]['column']; 
+        $columnSortOrder = $request->order[0]['dir'];
+        $coloumnName = $request->columns[$columnIndex]['data'];
+        if($coloumnName == 'id' || $coloumnName == 'actions'){
+            $coloumnName = "clId";
+            if($columnSortOrder == 'desc'){
+                $operator = "minus";
+                $start = $count-($request->start);
+            }
+        }
+        if($coloumnName == 'name'){
+            $coloumnName = "clname";
+        }        
+        $datas = $clientsQuery->offset($request->start)
+                ->limit($request->length)->orderby($coloumnName,$columnSortOrder)->get();
+      
+       
+        $result_data = array();
+
+        foreach($datas as $data){
+          
+            $srcsource = route('clients.show',$data->clId);
+            $delete = \Form::open(['method' => 'DELETE','route' => ['clients.destroy', $data->clId],'style'=>'display:inline']);
+            $delete.= \Form::submit('Delete', ['class' => 'btn btn-danger']);
+            $delete.= \Form::close();
+            $actions = "<a class='btn btn-primary' href=
+                         ".route('clients.edit',$data->clId).">Edit</a>$delete";
+            if($operator == "minus"){
+                $id = $start--;
+            }else{
+                $id = ++$start;
+            } 
+    
+                $result_data[] = array(
+                     "id" => $id,
+                     "name"=>$data->clname,
+                     "ClientOrganization"=>$data->ClientOrganization,
+                     "country"=>$data->cname,
+                     "region"=>$data->region,
+                     "actions"=>$actions
+                   );
+        }
+
+         $response = array(
+          "draw" => intval($request->draw),
+          "iTotalRecords" => client::count(),
+          "iTotalDisplayRecords" => $count,
+          "aaData" => $result_data
+        );
+         return json_encode($response);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +122,8 @@ class ClientController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('roles.create',compact('permission'));
+        $countries = Country::pluck('name','id')->all();
+        return view('clients.create',compact('permission','countries'));
     }
 
 
@@ -56,19 +134,20 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'name' => 'required',
+            'ClientOrganization' => 'required',
+            'country' => 'required',
+            'region' => 'required',
+            'address' => 'required'
         ]);
 
-
-        $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
-
-
-        return redirect()->route('roles.index')
-                        ->with('success','Role created successfully');
+        $create_element = array('name' => $request->input('name'),'ClientOrganization' => $request->input('ClientOrganization'),'country' => $request->input('country'),'region' => $request->input('region'),'address' => $request->input('address'));
+            $create_element['OtherInformation'] = (!empty($request->input('OtherInformation')))?$request->input('OtherInformation'):"";
+        $user = Client::create($create_element)->toSql();        
+        return redirect()->route('clients.index')
+                        ->with('success','Clients created successfully');
     }
     /**
      * Display the specified resource.
@@ -84,7 +163,7 @@ class ClientController extends Controller
             ->get();
 
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('clients.show',compact('role','rolePermissions'));
     }
 
 
@@ -96,14 +175,12 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        $permission = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
-
-
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        $client = Client::find($id);
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
+        //     ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
+        //     ->all();
+        $countries = Country::pluck('name','id')->all();
+        return view('clients.edit',compact('client','countries'));
     }
 
 
@@ -118,20 +195,24 @@ class ClientController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
+            'ClientOrganization' => 'required',
+            'country' => 'required',
+            'region' => 'required',
+            'address' => 'required'
         ]);
 
 
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+        $client = Client::find($id);
+        $client->name = $request->input('name');
+        $client->ClientOrganization = $request->input('ClientOrganization');        
+        $client->country = $request->input('country');
+        $client->region = $request->input('region');               
+        $client->address = $request->input('address');
+        $client->OtherInformation = (!empty($request->input('OtherInformation')))?$request->input('OtherInformation'):"";
+        $client->save();
 
-
-        $role->syncPermissions($request->input('permission'));
-
-
-        return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+        return redirect()->route('clients.index')
+                        ->with('success','Client updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -141,8 +222,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+        DB::table("clients")->where('id',$id)->delete();
+        return redirect()->route('clients.index')
+                        ->with('success','Client deleted successfully');
     }
 }

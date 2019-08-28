@@ -39,7 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+ 
      public function getDepartmentNames()
     {     
         $department_ids = UserHasDepartment::select('department_id')->where('user_id',$this->id)->get();

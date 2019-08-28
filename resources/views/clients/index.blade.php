@@ -23,7 +23,7 @@
             <h2>Role Management</h2>
         </div>-->
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('clients.create') }}"> {{ __('constants.Create_New_Role') }}</a>
+            <a class="btn btn-primary" href="{{ route('clients.create') }}"> {{ __('constants.Create_New_Client') }}</a>
         </div>
     </div>
 </div>
@@ -37,36 +37,47 @@
 
 <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('constants.Role_Management') }}</h3>
+              <h3 class="box-title"> {{ __('constants.Client_Management') }}</h3>
             </div>
-<table class="table table-bordered">
-  <tr>
-     <th>{{ __('constants.No') }}</th>
-     <th>{{ __('constants.Name') }}</th>
-     <th width="280px">{{ __('constants.Action') }}</th>
-  </tr>
-    @foreach ($clients as $key => $client)
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $client->name }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ route('roles.show',$client->id) }}">Show</a>
-            @can('client-edit')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$client->id) }}">Edit</a>
-            @endcan
-            @can('client-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $client->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
-            @endcan
-        </td>
-    </tr>
-    @endforeach
+ <div class="box-body">
+         <input type='text' class="filter" id='searchByclientName' placeholder='Enter Name'>
+         <input type='text' class="filter" id='searchByClientOrganization' placeholder='Enter ClientOrganization'> 
+         <select id='searchByCountry' class="filter">
+           <option value=''>-- Select Country--</option>
+           @foreach($countries as $country)
+           <option value="{{ $country->id }}">{{ $country->name }}</option>
+           @endforeach
+         </select> 
+          <input type='text' id='searchByRegion' class="filter" placeholder='Enter Region'> 
+         
+<table id="clienttable" class="table table-bordered table-striped">
+  <thead>                
+                <tr>
+                   <th>{{ __('constants.No') }}</th>
+                   <th>{{ __('constants.Name') }}</th>
+                   <th>{{ __('constants.ClientOrganization') }}</th>
+                   <th>{{ __('constants.Country') }}</th>
+                   <th>{{ __('constants.Region') }}</th>
+                   <th>{{ __('constants.Action') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+              
+                </tbody>
+                <tfoot>
+                <tr>
+                   <th>{{ __('constants.No') }}</th>
+                   <th>{{ __('constants.Name') }}</th>
+                   <th>{{ __('constants.ClientOrganization') }}</th>
+                   <th>{{ __('constants.Country') }}</th>
+                   <th>{{ __('constants.Region') }}</th>
+                   <th>{{ __('constants.Action') }}</th>
+                </tr>
+                </tfoot>
+   
 </table>
-
 </div>
-
-{!! $clients->render() !!}
+</div>
  </section>
 </div>
 

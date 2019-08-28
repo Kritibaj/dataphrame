@@ -29,7 +29,6 @@
         </div>
       </form>-->
       <!-- /.search form -->
-      sidebar menu: : style can be found in sidebar.less
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active" >
@@ -42,17 +41,22 @@
         </li> 
          <li >
           <a href="{{ route('users.index') }}">
-            @role('super_admin') <i class="fa fa-user"></i> <span> General Employee Portal @endrole</span>           
+            @role('Super Admin') <i class="fa fa-user"></i> <span> General Employee Portal @endrole</span>           
           </a>
         </li> 
 		    <li>
           <a href="{{ route('roles.index') }}">
-            @role('super_admin')<i class="fa fa-th"></i> <span> Manage Role @endrole</span>
+            @role('Super Admin')<i class="fa fa-th"></i> <span> Manage Role @endrole</span>
           </a>
         </li>
         <li>
           <a href="{{ route('clients.index') }}">
-            @role('super_admin')<i class="fa fa-th"></i> <span> Manage Client @endrole</span>
+            @role('Super Admin')<i class="fa fa-th"></i> <span> Manage Client @endrole</span>
+          </a>
+        </li> 
+        <li>
+          <a href="{{ route('calendar') }}">
+            @role('Super Admin')<i class="fa fa-th"></i> <span> Calender @endrole</span>
           </a>
         </li>      			
   </aside>

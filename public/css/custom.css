@@ -1,6 +1,11 @@
-.content{
-	padding:50px;
+
+div#example1_wrapper {
+    margin-top: 10px;
 }
 
-
+.filter{
+	padding: 5px 7px;
+    border: 1px solid #d6d6d6;
+    margin-right: 10px;
+}
 

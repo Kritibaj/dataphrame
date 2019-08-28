@@ -36,55 +36,56 @@
 @endif
 
  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">{{ __('constants.User_Management') }}</h3>
-    </div>
-<table class="table table-bordered">
- <tr>
-   <th>{{ __('constants.No') }}</th>
-   <th>{{ __('constants.Name') }}</th>
-   <th>{{ __('constants.Profile_Image') }}</th>
-   <th>{{ __('constants.Employee_Number') }}</th>
-   <th>{{ __('constants.Roles') }}</th>
-   <th>{{ __('constants.Departments') }}</th>
-   <th width="280px">{{ __('constants.Action') }}</th>
- </tr>
- @foreach ($data as $key => $user)
-  <tr>
-    <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>@if(!empty($user->profile_image))<img src="storage/profile_image/{{ $user->profile_image }}" width="100px" heigth="100px" >@endif</td>
-    <td>{{ $user->employee_number }}</td>
-    <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
-    
-    <td>
-      @if(!empty($user->getDepartmentNames()))
-        @foreach($user->getDepartmentNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
-    <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </td>
-  </tr>
- @endforeach
-</table>
-</div>
-
-
-{!! $data->render() !!}
-
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ __('constants.User_Management') }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+         <input type='text' class="filter" id='searchByName' placeholder='Enter Name'>
+         <input type='text' class="filter"id='searchByEmployeeno' placeholder='Enter Employee No'>
+         <select id='searchByRole' class="filter">
+           <option value=''>-- Select Role--</option>
+           @foreach($roles as $role)
+           <option value="{{ $role->id }}">{{ $role->name }}</option>
+           @endforeach
+         </select> 
+         <select id='searchByDepartment' class="filter">
+           <option value=''>-- Select Department--</option>
+           @foreach($departments as $department)
+           <option value="{{ $department->id }}">{{ $department->name }}</option>
+           @endforeach
+         </select> 
+        
+        <table id="example1" class="table table-bordered table-striped">
+                <thead>                
+                <tr>
+                   <th>{{ __('constants.No') }}</th>
+                   <th>{{ __('constants.Name') }}</th>
+                   <th>{{ __('constants.Profile_Image') }}</th>
+                   <th>{{ __('constants.Employee_Number') }}</th>
+                   <th>{{ __('constants.Roles') }}</th>
+                   <th>{{ __('constants.Departments') }}</th>
+                   <th>{{ __('constants.Action') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+              
+                </tbody>
+                <tfoot>
+                <tr>
+                   <th>{{ __('constants.No') }}</th>
+                   <th>{{ __('constants.Name') }}</th>
+                   <th>{{ __('constants.Profile_Image') }}</th>
+                   <th>{{ __('constants.Employee_Number') }}</th>
+                   <th>{{ __('constants.Roles') }}</th>
+                   <th>{{ __('constants.Departments') }}</th>
+                   <th>{{ __('constants.Action') }}</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
 </section>
 </div>
 @endsection

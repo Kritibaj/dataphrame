@@ -23,5 +23,12 @@ return [
         'Edit_User' => 'Edit User',
         'Client_Management' => 'Client Management',
         'Create_New_Role' => 'Create New Role',
-        'Create_New_Client' => 'Create New Client'
+        'Create_New_Client' => 'Create New Client',
+        'ClientOrganization' => 'Client Organization',
+        'Country' => 'Country',
+        'Region' => 'Region',
+        'Address' => 'Address',
+        'OtherInformation' => 'Other Information',
+        'Edit_Client' => 'Edit Client',
+        'Permission' => 'Permission'
 ];

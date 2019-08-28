@@ -7,12 +7,12 @@
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Role Management
+        {{ __('constants.Client_Management') }}
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li >Role Management</li>
-        <li class="active">Edit Role</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('constants.Home') }}</a></li>
+        <li >{{ __('constants.Client_Management') }}</li>
+        <li class="active">{{ __('constants.Edit_Client') }} </li>
       </ol>
     </section>
         
@@ -24,7 +24,7 @@
             <h2>Edit Role</h2>
         </div>-->
         <div class="pull-left">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('clients.index') }}"> {{ __('constants.Back') }}</a>
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
 
 @if (count($errors) > 0)
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <strong>Whoops!</strong> {{ __('constants.errormessage') }}<br><br>
         <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -43,57 +43,47 @@
 
 <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Edit Role</h3>
+              <h3 class="box-title">{{ __('constants.Edit_Client') }}</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-           {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+           {!! Form::model($client, ['method' => 'PATCH','route' => ['clients.update', $client->id]]) !!}
               <div class="box-body">
-                <div class="form-group">
-                  <label >Name:</label>
-                 {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+               <div class="form-group">
+                  <label>{{ __('constants.Name') }}</label>
+                  {!! Form::text('name', null, array('placeholder' => __('constants.Name'),'class' => 'form-control')) !!}
                 </div>
                 <div class="form-group">
-                  <label>Permission:</label>
-                    <br/>
-                    @foreach($permission as $value)
-                        <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                        {{ $value->name }}</label>
-                    <br/>
-                    @endforeach
+                  <label>{{ __('constants.ClientOrganization') }}</label>
+                  {!! Form::text('ClientOrganization', null, array('placeholder' => __('constants.ClientOrganization'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Country') }}</label>
+                  {!! Form::select('country', $countries, null , array('placeholder' => __('constants.Country'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Region') }}</label>
+                  {!! Form::text('region', null, array('placeholder' => __('constants.Region'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.Address') }}</label>
+                  {!! Form::textarea('address', null, array('placeholder' => __('constants.Address'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                  <label>{{ __('constants.OtherInformation') }}</label>
+                  {!! Form::textarea('OtherInformation', null, array('placeholder' => __('constants.OtherInformation'),'class' => 'form-control')) !!}
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{ __('constants.Submit') }}</button>
               </div>
           {!! Form::close() !!}
           </div>
 
 
-<!--<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permission:</strong>
-            <br/>
-            @foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                {{ $value->name }}</label>
-            <br/>
-            @endforeach
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</div>-->
+
 {!! Form::close() !!}
 </section>
 </div>
