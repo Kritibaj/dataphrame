@@ -41,7 +41,7 @@
         </li> 
          <li >
           <a href="{{ route('users.index') }}">
-            @role('Super Admin') <i class="fa fa-user"></i> <span> General Employee Portal @endrole</span>           
+            @role('Super Admin') <i class="fa fa-user"></i> <span> Manage Employees @endrole</span>           
           </a>
         </li> 
 		    <li>
@@ -58,5 +58,15 @@
           <a href="{{ route('calendar') }}">
             @role('Super Admin')<i class="fa fa-th"></i> <span> Calender @endrole</span>
           </a>
-        </li>      			
+        </li> 
+        <li>
+          <a href="{{ route('tasklists.index') }}">
+            @role('Super Admin')<i class="fa fa-th"></i> <span> Manage Task List  @endrole</span>
+          </a>
+        </li>  
+         <li>
+          <a href="{{ route('joborders.index') }}">
+            @role('Super Admin')<i class="fa fa-th"></i> <span> Manage JobOrder  @endrole</span>
+          </a>
+        </li>         			
   </aside>

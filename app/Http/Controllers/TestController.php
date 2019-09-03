@@ -3,6 +3,7 @@
 namespace BPMS\Http\Controllers;
 
 use Illuminate\Http\Request;
+use BPMS\ModelHasRole;
 
 class TestController extends Controller
 {
@@ -13,7 +14,8 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $tasklists = Tasklist::all();
+        print_r($tasklists); die();
     }
 
     /**

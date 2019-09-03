@@ -137,15 +137,15 @@ class ClientController extends Controller
     {  
         $this->validate($request, [
             'name' => 'required',
+            'email' => 'required',
             'ClientOrganization' => 'required',
             'country' => 'required',
             'region' => 'required',
             'address' => 'required'
         ]);
-
-        $create_element = array('name' => $request->input('name'),'ClientOrganization' => $request->input('ClientOrganization'),'country' => $request->input('country'),'region' => $request->input('region'),'address' => $request->input('address'));
+        $create_element = array('name' => $request->input('name'),'ClientOrganization' => $request->input('ClientOrganization'),'country' => $request->input('country'),'region' => $request->input('region'),'address' => $request->input('address'),'email'=> $request->input('email'));
             $create_element['OtherInformation'] = (!empty($request->input('OtherInformation')))?$request->input('OtherInformation'):"";
-        $user = Client::create($create_element)->toSql();        
+        $user = Client::create($create_element);        
         return redirect()->route('clients.index')
                         ->with('success','Clients created successfully');
     }
@@ -195,15 +195,16 @@ class ClientController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'email' => 'required',
             'ClientOrganization' => 'required',
             'country' => 'required',
             'region' => 'required',
             'address' => 'required'
         ]);
 
-
         $client = Client::find($id);
         $client->name = $request->input('name');
+        $client->email = $request->input('email');
         $client->ClientOrganization = $request->input('ClientOrganization');        
         $client->country = $request->input('country');
         $client->region = $request->input('region');               

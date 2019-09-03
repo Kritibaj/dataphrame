@@ -54,6 +54,10 @@
                   {!! Form::text('name', null, array('placeholder' => __('constants.Name'),'class' => 'form-control')) !!}
                 </div>
                 <div class="form-group">
+                  <label>{{ __('constants.Email') }}</label>
+                  {!! Form::text('email', null, array('placeholder' => __('constants.Email'),'class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
                   <label>{{ __('constants.ClientOrganization') }}</label>
                   {!! Form::text('ClientOrganization', null, array('placeholder' => __('constants.ClientOrganization'),'class' => 'form-control')) !!}
                 </div>
