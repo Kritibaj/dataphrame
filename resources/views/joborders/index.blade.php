@@ -53,7 +53,7 @@
                    <th>{{ __('constants.Description') }}</th>
                    <th>{{ __('constants.Scope') }}</th>
                    <th>{{ __('constants.PoNumber') }}</th>
-                   <th>{{ __('constants.Notes') }}</th>
+              <!--      <th>{{ __('constants.Notes') }}</th> -->
                    <th>{{ __('constants.ClientPm') }}</th>
                    <th>{{ __('constants.Action') }}</th>
                 </tr>
@@ -70,7 +70,7 @@
                    <th>{{ __('constants.Description') }}</th>
                    <th>{{ __('constants.Scope') }}</th>
                    <th>{{ __('constants.PoNumber') }}</th>
-                   <th>{{ __('constants.Notes') }}</th>
+                   <!-- <th>{{ __('constants.Notes') }}</th> -->
                    <th>{{ __('constants.ClientPm') }}</th>
                    <th>{{ __('constants.Action') }}</th>
                 </tr>

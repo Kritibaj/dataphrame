@@ -41,7 +41,7 @@
         </li> 
          <li >
           <a href="{{ route('users.index') }}">
-            @role('Super Admin') <i class="fa fa-user"></i> <span> Manage Employees @endrole</span>           
+            <i class="fa fa-user"></i> <span> Manage Employees </span>           
           </a>
         </li> 
 		    <li>

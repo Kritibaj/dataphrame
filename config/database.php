@@ -62,7 +62,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
             'modes' => [
-                'NO_ZERO_DATE'
+                'NO_ZERO_DATE',
             ]
         ],
 

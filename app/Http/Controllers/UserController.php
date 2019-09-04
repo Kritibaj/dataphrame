@@ -13,6 +13,7 @@ use BPMS\UserHasDepartment;
 use BPMS\ModelHasRole;
 use DB;
 use Hash;
+use Auth;
 
 
 class UserController extends Controller
@@ -24,6 +25,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        
         $data = User::orderBy('id','DESC')->paginate(5);
         $roles = Role::all();
         $departments = Department::all();

@@ -331,7 +331,7 @@
            { data: 'description' },
            { data: 'scope' },
            { data: 'po_number' }, 
-           { data: 'notes' },          
+           // { data: 'notes' },          
            { data: 'client_pm' },
            { data: 'actions' },
         ]

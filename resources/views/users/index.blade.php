@@ -23,7 +23,7 @@
             <h2>Users Management</h2>
         </div>-->
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.create') }}">{{ __('constants.Create_New_User') }}</a>
+           @role('Super Admin')<a class="btn btn-primary" href="{{ route('users.create') }}">{{ __('constants.Create_New_User') }}</a>@endrole
         </div>
     </div>
 </div>

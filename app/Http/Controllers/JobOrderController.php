@@ -80,7 +80,7 @@ class JobOrderController extends Controller
                      "description"=>$data->description,
                      "scope"=>$data->scope,
                      "po_number"=>$data->po_number,
-                     "notes" => "<a href='/joborders/notes/$data->JobOrderId'>Notes</a>",
+                    // "notes" => "<a href='/joborders/notes/$data->JobOrderId'>Notes</a>",
                      "client_pm"=>$data->name.' ('.$data->email.')',
                      "actions" => $actions
                    );
@@ -134,7 +134,7 @@ class JobOrderController extends Controller
             'client_pm' => 'required'
         ]);
                
-         $create_element = array('job_order_number' => mt_rand(1000000000, 9999999999),'quote_number' => $request->input('quote_number'),'quote_value' => $request->input('quote_value'),'dat_of_request' => $request->input('dat_of_request'),'description' => $request->input('description'),'address' => $request->input('address'),'hotel_name' => $request->input('hotel_name'),'city' => $request->input('city'),'post_code' => $request->input('post_code'),'address' => $request->input('address'),'hotel_contact' => $request->input('hotel_contact'),'scope' => $request->input('scope'),'po_number' => $request->input('po_number'),'country' => $request->input('country'),'client_pm' => $request->input('client_pm'));
+         $create_element = array('job_order_number' => rand(1000000000, 9999999999),'quote_number' => $request->input('quote_number'),'quote_value' => $request->input('quote_value'),'dat_of_request' => $request->input('dat_of_request'),'description' => $request->input('description'),'address' => $request->input('address'),'hotel_name' => $request->input('hotel_name'),'city' => $request->input('city'),'post_code' => $request->input('post_code'),'address' => $request->input('address'),'hotel_contact' => $request->input('hotel_contact'),'scope' => $request->input('scope'),'po_number' => $request->input('po_number'),'country' => $request->input('country'),'client_pm' => $request->input('client_pm'));
         
         JobOrder::create($create_element);
         return redirect()->route('joborders.index')
