@@ -1,43 +1,36 @@
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DataPhrame</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/font-awesome/css/font-awesome.min.css') !!}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/Ionicons/css/ionicons.min.css') !!}">
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}">
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/fullcalendar/dist/fullcalendar.print.min.css') !!}" media="print">
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{!! asset('theme/dist/css/AdminLTE.min.css') !!}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="{!! asset('favicon.ico') !!}" type="image/x-icon">
 
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{!! asset('theme/dist/css/skins/_all-skins.min.css') !!}">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/morris.js/morris.css') !!}">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/jvectormap/jquery-jvectormap.css') !!}">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') !!}">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="{!! asset('theme/bower_components/bootstrap-daterangepicker/daterangepicker.css') !!}">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <!--<link rel="stylesheet" href="{!! asset('theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') !!}">-->
-  <link rel="stylesheet" href="{!! asset('css/custom.css') !!}">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- Bootstrap Core Css -->
+    <link href="{!! asset('theme/plugins/bootstrap/css/bootstrap.css') !!}" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="{!! asset('theme/plugins/node-waves/waves.css') !!}" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="{!! asset('theme/plugins/bootstrap-select/css/bootstrap-select.css') !!}" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="{!! asset('theme/plugins/animate-css/animate.css') !!}" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="{!! asset('theme/plugins/morrisjs/morris.css') !!}" rel="stylesheet" />
+    <!-- JQuery DataTable Css -->
+     @yield('head_style')
+    <!-- Custom Css -->
+    <link href="{!! asset('theme/css/style.css') !!}" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="{!! asset('theme/css/themes/all-themes.css') !!}" rel="stylesheet" />
+    <link rel="stylesheet" href="{!! asset('css/custom.css') !!}">
 </head>
+<input type="hidden" id="currentrole" value="{{ Auth::user()['roles'][0]['name'] }}" >

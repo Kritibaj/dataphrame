@@ -81,8 +81,8 @@ class TasklistController extends Controller
         ]);
 
         Tasklist::create(['name'=>$request->input('name')]);
-        return redirect()->route('tasklists.index')
-                        ->with('success','Tasklist created successfully');
+        return redirect()->route('tasklists.index')->with('message-type', 'success')
+                        ->with('message','Tasklist created successfully');
     }
 
     /**
@@ -121,8 +121,8 @@ class TasklistController extends Controller
             'name' => 'required',
         ]);
         $tasklist = Tasklist::find($id)->update(['name'=> $request->input('name')]);
-        return redirect()->route('tasklists.index')
-                        ->with('success','Task updated successfully');
+        return redirect()->route('tasklists.index')->with('message-type', 'success')
+                        ->with('message','Task updated successfully');
     }
 
     /**
@@ -134,7 +134,7 @@ class TasklistController extends Controller
     public function destroy($id)
     {
         Tasklist::find($id)->delete();
-        return redirect()->route('tasklists.index')
-                        ->with('success','Task deleted successfully');
+        return redirect()->route('tasklists.index')->with('message-type', 'success')
+                        ->with('message','Task deleted successfully');
     }
 }

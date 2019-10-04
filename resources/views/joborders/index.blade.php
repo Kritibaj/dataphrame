@@ -4,43 +4,52 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
- <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>        
-        {{ __('constants.JobOrder_Management') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('constants.Home') }}</a></li>
-        <li class="active">{{ __('constants.JobOrder_Management') }}</li>
-      </ol>
-    </section>
-		
+ <!-- Content Header (Page header) -->		
     <!-- Main content -->
     <section class="content">
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-       <!-- <div class="pull-left">
-            <h2>Users Management</h2>
-        </div>-->
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('joborders.create') }}">{{ __('constants.Create_New_JobOrder') }}</a>
+         <ol class="breadcrumb breadcrumb-bg-orange">
+            <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
+            <li class="active" >{{ __('constants.JobOrder_Management') }}</li>
+         </ol>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+           <!-- <div class="pull-left">
+                <h2>Users Management</h2>
+            </div>-->
+
+            @if(Auth::user()['roles'][0]['name'] == 'Admin' || Auth::user()['roles'][0]['name'] == 'Operations' || Auth::user()['roles'][0]['name'] == 'Accounts')
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('joborders.create') }}">{{ __('constants.Create_New_JobOrder') }}</a>
+            </div>
+            @endif
         </div>
     </div>
-</div>
 
 
-@if ($message = Session::get('success'))
+<!-- @if ($message = Session::get('success'))
 <div class="alert alert-success">
   <p>{{ $message }}</p>
 </div>
+{{ Session::forget('success') }}
+@endif -->
+
+@if(Session::has('message'))
+    <div class="alert alert-{{ Session::get('message-type') }} alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <i class="glyphicon glyphicon-{{ Session::get('message-type') == 'success' ? 'ok' : 'remove'}}"></i> {{ Session::get('message') }}
+    </div>
 @endif
 
  <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('constants.JobOrder_Management') }}</h3>
-            </div>
+            <div class="card" >
+               <div class="header">
+                    <h2>
+                        {{ __('constants.JobOrder_Management') }}
+                    </h2>                    
+                </div>
             <!-- /.box-header -->
-            <div class="box-body">
+    <div class="body">
         
         
         <table id="jobOrderId" class="table table-bordered table-striped">
@@ -49,8 +58,6 @@
                    <th>{{ __('constants.No') }}</th>
                    <th>{{ __('constants.JobOrderNumber') }}</th>
                    <th>{{ __('constants.QuoteNumber') }}</th>
-                   <th>{{ __('constants.QuoteValue') }}</th>
-                   <th>{{ __('constants.Description') }}</th>
                    <th>{{ __('constants.Scope') }}</th>
                    <th>{{ __('constants.PoNumber') }}</th>
               <!--      <th>{{ __('constants.Notes') }}</th> -->
@@ -66,8 +73,6 @@
                    <th>{{ __('constants.No') }}</th>
                    <th>{{ __('constants.JobOrderNumber') }}</th>
                    <th>{{ __('constants.QuoteNumber') }}</th>
-                   <th>{{ __('constants.QuoteValue') }}</th>
-                   <th>{{ __('constants.Description') }}</th>
                    <th>{{ __('constants.Scope') }}</th>
                    <th>{{ __('constants.PoNumber') }}</th>
                    <!-- <th>{{ __('constants.Notes') }}</th> -->
@@ -78,7 +83,13 @@
               </table>
             </div>
             <!-- /.box-body -->
+           </div>
           </div>
 </section>
 </div>
+@endsection
+
+@section('footer_js')
+<script src="{!! asset('themeold/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}"></script>
+<script src="{!! asset('themeold/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}"></script>
 @endsection

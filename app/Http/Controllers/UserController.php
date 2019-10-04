@@ -33,6 +33,22 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function grid(Request $request)
+    {
+        
+        $data = User::orderBy('id','DESC')->paginate(5);
+        $roles = Role::all();
+        $departments = Department::all();
+        return view('users.grid',compact('data','roles','departments'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +56,7 @@ class UserController extends Controller
      */
     public function ajaxrequestUser(Request $request)
     {
-        $usersQuery = User::select('*','users.id as userId','users.name as userName')->leftJoin('model_has_roles',"users.id","=","model_has_roles.model_id")->leftJoin('user_has_departments',"users.id","=","user_has_departments.user_id")->join('roles',"roles.id","=","model_has_roles.role_id")->join('departments',"departments.id","=","user_has_departments.department_id");
+        $usersQuery = User::select('*','users.id as userId','users.name as userName')->leftJoin('model_has_roles',"users.id","=","model_has_roles.model_id")->leftjoin('roles',"roles.id","=","model_has_roles.role_id")->leftJoin('user_has_departments',"users.id","=","user_has_departments.user_id")->leftjoin('departments',"departments.id","=","user_has_departments.department_id");
         if(isset($request->searchByRole) && !empty($request->searchByRole)){
             $usersQuery->where('model_has_roles.role_id',$request->searchByRole);
         }
@@ -143,9 +159,9 @@ class UserController extends Controller
                      "employee_number"=>$data->employee_number,
                      "roles"=>$roles,
                      "department"=>$department,
-                     "actions"=>$actions
+                     "actions"=>($request->currentrole == "Admin")?$actions:""
                    );
-        }
+        } 
          $response = array(
           "draw" => intval($request->draw),
           "iTotalRecords" => User::count(),
@@ -182,10 +198,11 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'departments' => 'required',
-            'roles' => 'required',
+            'department' => 'required',
+            'role' => 'required',
             'employee_number' => 'required' 
         ]);
+
         $docs = $request->file('profile_image');
         $fileContent = $docs->get();
         $extension = $docs->getClientOriginalExtension();
@@ -204,15 +221,14 @@ class UserController extends Controller
         $user = User::create($input);
         $useerId = $user->id;
         
-        foreach($input['departments'] as $depart){ 
         $department =  new UserHasDepartment;
         $department->user_id = $useerId;
-        $department->department_id = $depart;
+        $department->department_id = $input['department'];
         $department->save();
-        }        
-        $user->assignRole($request->input('roles'));
-        return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+
+        $user->assignRole($request->input('role'));
+        return redirect()->route('users.index')->with('message-type', 'success')
+                        ->with('message','User created successfully');
      }
     public function show($id)
     {
@@ -237,7 +253,8 @@ class UserController extends Controller
         foreach($selectedDepartment as $sdepartment){ 
              $selectedDepartments[] = $sdepartment->department_id;
         }
-        $selectedDepartments = (!empty($selectedDepartments))?$selectedDepartments:0;
+        $selectedDepartments = (!empty($selectedDepartments))?$selectedDepartments:0;     
+                  
         return view('users.edit',compact('user','roles','userRole','departments','selectedDepartments'));
     }
 
@@ -248,7 +265,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function profile($id)
-    {
+    { 
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRoles = $user->roles->pluck('name','name')->all();
@@ -273,8 +290,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'dob' => 'required',
-            'departments' => 'required',
-            'roles' => 'required',
+            'department' => 'required',
+            'role' => 'required',
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'employee_number' => 'required' 
         ]);
@@ -302,21 +319,24 @@ class UserController extends Controller
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
-        if(!empty($input['departments'])){
+        if(!empty($input['department'])){
             DB::table('user_has_departments')->where('user_id', '=', $id)->delete();
-            foreach($input['departments'] as $depart){ 
                 $department =  new UserHasDepartment;
                 $department->user_id = $id;
-                $department->department_id = $depart;
+                $department->department_id = $input['department'];
                 $department->save();
-            } 
         }
 
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('role'));
+        
+        if(Auth::user()['roles'][0]['name'] == 'Admin'){
+            $url = 'users.index';
+        }else{
+            $url = 'users.grid';
+        }
 
-
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+        return redirect()->route($url)->with('message-type', 'success')
+                        ->with('message','User updated successfully');
     }
 
 
@@ -336,7 +356,71 @@ class UserController extends Controller
         }
         User::find($id)->delete();
         UserHasDepartment::where('user_id',$id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        return redirect()->route('users.index')->with('message-type', 'success')
+                        ->with('message','User deleted successfully');
+    }
+
+    public function showemployeegrid(Request $request){
+        //$datas = User::select("*")->where('users.name', 'LIKE', '%' . $request->name . '%')->where('employee_number', 'LIKE', '%' . $request->empno . '%');
+        $datas = User::select('*','users.id as userId','users.name as userName')->leftJoin('model_has_roles',"users.id","=","model_has_roles.model_id")->leftjoin('roles',"roles.id","=","model_has_roles.role_id")->leftJoin('user_has_departments',"users.id","=","user_has_departments.user_id")->leftjoin('departments',"departments.id","=","user_has_departments.department_id"); 
+        if(isset($request->name) && !empty($request->name)){
+            $datas->where('users.name', 'LIKE', '%' . $request->name . '%');
+        }
+        if(isset($request->empno) && !empty($request->empno)){
+            $datas->where('employee_number', 'LIKE', '%' . $request->empno . '%');
+        }
+        if(isset($request->roleid) && !empty($request->roleid)){
+            $datas->where('model_has_roles.role_id',$request->roleid);
+        }
+
+        if(isset($request->departmentid) && !empty($request->departmentid)){
+            $datas->where('user_has_departments.department_id',$request->departmentid);
+        }
+
+        $empdata = $datas->orderBy('users.id','DESC')->get();
+        //$datas->orderBy('id','DESC')->get();
+        //$datas->orderBy('users.id','DESC')->get();
+        $html = "";  
+        if($empdata->count()>0){ 
+         foreach($empdata as $data){
+            $data->id = $data->userId;
+            $html.= "<div class='col-sm-6 col-md-3'>
+                                    <div class='thumbnail'>";
+
+
+                  $html.= "<a href='profile/$data->id'> <img src='/storage/profile_image/$data->profile_image' width='199' height='253'> </a>
+                                        <div class='caption'>
+                                            <h3>$data->name</h3>
+                                            <p>
+                                               <b>Department: </b>";
+
+                                               if(!empty($data->getDepartmentNames())):
+                                                  foreach($data->getDepartmentNames() as $v):
+                                                    $html.= $v;
+                                                  endforeach;
+                                               endif; 
+                                $html.="</p>
+                                            <p>
+                                               <b>Role: </b>";
+
+                                               if(!empty($data->getRoleNames())):
+                                                  foreach($data->getRoleNames() as $role):
+                                                     $html.= $role;
+                                                  endforeach;
+                                               endif;
+                                $html.="</p>
+                                            <p>
+                                                <a href='".route('users.edit',$data->id)."' class='btn btn-primary waves-effect' role='button'>Edit</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>";
+
+         }
+     }else{
+        $html.="<div class='col-sm-6 col-md-3' style='color:red;'>No record found</div>";
+     }
+                         
+        return $html;
     }
 }

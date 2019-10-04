@@ -31,9 +31,10 @@
 </div>
 
 
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
+@if(Session::has('message'))
+    <div class="alert alert-{{ Session::get('message-type') }} alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <i class="glyphicon glyphicon-{{ Session::get('message-type') == 'success' ? 'ok' : 'remove'}}"></i> {{ Session::get('message') }}
     </div>
 @endif
 
@@ -71,4 +72,10 @@
  </section>
 </div>
 
+@endsection
+
+
+@section('footer_js')
+<script src="{!! asset('themeold/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}"></script>
+<script src="{!! asset('themeold/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}"></script>
 @endsection

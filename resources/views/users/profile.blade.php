@@ -1,318 +1,333 @@
 @extends('layouts.common')
+@section('head_style')
+  <link rel="stylesheet" href="{!! asset('themeold/bower_components/font-awesome/css/font-awesome.min.css') !!}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{!! asset('themeold/bower_components/Ionicons/css/ionicons.min.css') !!}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{!! asset('themeold/dist/css/AdminLTE.min.css') !!}">
+<style>
+.content-mg{margin: 100px 15px 0 60px !important;}
+.txt-content{min-height: auto !important;padding: 0 !important;}
+.breadcrumb-mg{margin: 0px 15px 21px 15px !IMPORTANT;}
+</style>
+
+@endsection
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        MyProfile
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">User profile</li>
-      </ol>
-    </section>
-   @if(!empty(Auth::user()->profile_image))
-             @php $user_profile ='storage/profile_image/'.Auth::user()->profile_image; @endphp 
-          @else
-             @php $user_profile ='img/default_profile.png'; @endphp 
-          @endif
+
     <!-- Main content -->
-    <section class="content">
-
-      <div class="row">
-        <div class="col-md-3">
-
-          <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ asset($user_profile ) }}" alt="User profile picture">
-
-              <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
-
-             <!-- <p class="text-muted text-center">Employee Number: {{ Auth::user()->employee_number }}</p>
-
-             <!-- <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Friends</b> <a class="pull-right">13,287</a>
-                </li>
-              </ul>-->
-
-              <p class="btn btn-primary btn-block"><b>Employee Number: {{ Auth::user()->employee_number }}</b></p>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-          <!-- About Me Box -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <strong><i class="fa fa-list-alt margin-r-5"></i> Departments</strong>
-              @foreach($selectedDepartments as $selectedDepartment)
-              <p class="text-muted">
-                <span class="label label-primary"> {{ $selectedDepartment }}  </span>
-              </p>
-              @endforeach
-
-              <hr>
-
-              <strong><i class="fa fa-users margin-r-5"></i> Roles</strong>
-
-              @foreach($userRoles as $userRole)
-              <p class="text-muted">
-                <span class="label label-primary"> {{ $userRole }} </span>
-              </p>
-              @endforeach
-
-              <hr>
-
-             <!-- <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-              <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>-->
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-
-         <div class="col-md-9">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="active tab-pane" id="activity">
-                <!-- Post -->
-               <!-- <div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{!! asset('theme/dist/img/user1-128x128.jpg') !!}" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Shared publicly - 7:30 PM today</span>
-                  </div>
-                  <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
-                  </p>
-                  <ul class="list-inline">
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                    </li>
-                    <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                </div>
-                <div class="post clearfix">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{!! asset('theme/dist/img/user7-128x128.jpg') !!}" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Sent you a message - 3 days ago</span>
-                  </div>
-                  <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
-                  </p>
-
-                  <form class="form-horizontal">
-                    <div class="form-group margin-bottom-none">
-                      <div class="col-sm-9">
-                        <input class="form-control input-sm" placeholder="Response">
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
-                      </div>
-                    </div>
-                  </form>
-                <div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="{!! asset('theme/dist/img/user6-128x128.jpg') !!}" alt="User Image">
-                        <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Posted 5 photos - 5 days ago</span>
-                  </div>
-                  <div class="row margin-bottom">
-                    <div class="col-sm-6">
-                      <img class="img-responsive" src="{!! asset('theme/dist/img/photo1.png') !!}" alt="Photo">
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="{!! asset('theme/dist/img/photo2.png') !!}" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="{!! asset('theme/dist/img/photo3.jpg') !!}" alt="Photo">
+    <section class="content content-mg">
+      <ol class="breadcrumb breadcrumb-bg-orange breadcrumb-mg">
+          <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
+          <li class="active" >{{ __('constants.User_Management') }}</li>
+          <li class="active" >{{ __('constants.Profile') }}</li>
+      </ol>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-3">
+                    <div class="card profile-card">
+                        <div class="profile-header">&nbsp;</div>
+                        <div class="profile-body">
+                            <div class="image-area">
+                                <img src="/Dataphrame/public/storage/profile_image/{{ $user->profile_image }}" alt="AdminBSB - Profile Image" />
+                            </div>
+                            <div class="content-area">
+                                <h3>{{ $user->name }}</h3>
+                                <p>@if(!empty($user->getDepartmentNames()))
+                                                  @foreach($user->getDepartmentNames() as $v)
+                                                     {{ $v }}
+                                                  @endforeach
+                                               @endif </p>
+                                <p>
+                                   {{ $user->employee_number }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="{!! asset('theme/dist/img/photo4.jpg') !!}" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="{!! asset('theme/dist/img/photo1.png') !!}" alt="Photo">
+                        <div class="profile-footer">
+                            <ul>
+                                <li>
+                                    <span>Current Projects</span>
+                                    <span>Project name</span>
+                                </li>
+                                <li>
+                                    <span>Project Completed</span>
+                                    <span>4</span>
+                                </li>
+                                <li>
+                                    <span>Pending Tasks</span>
+                                    <span>10</span>
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>
                         </div>
-                      </div>
                     </div>
-                  </div>
 
-                  <ul class="list-inline">
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                    </li>
-                    <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                    <div class="card card-about-me">
+                        <div class="header">
+                            <h2>ABOUT ME</h2>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                <li>
+                                    <div class="title">
+                                        <i class="material-icons">library_books</i>
+                                        Company 
+                                    </div>
+                                    <div class="content txt-content">
+                                        Company Name
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title">
+                                        <i class="material-icons">location_on</i>
+                                        Location
+                                    </div> 
+                                    <div class="content txt-content">
+                                        Malibu, California
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title">
+                                        <i class="material-icons">edit</i>
+                                        Skillset
+                                    </div>
+                                    <div class="content txt-content">
+                                        <span class="label bg-red">UI Design</span>
+                                        <span class="label bg-teal">JavaScript</span>
+                                        <span class="label bg-blue">PHP</span>
+                                        <span class="label bg-amber">Node.js</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title">
+                                        <i class="material-icons">notes</i>
+                                        Description
+                                    </div>
+                                    <div class="content txt-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.post -->
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="timeline">
-                <!-- The timeline -->
-                <ul class="timeline timeline-inverse">
-                  <!-- timeline time label -->
-                  <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
-                        </span>
-                  </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-envelope bg-blue"></i>
+                <div class="col-xs-12 col-sm-9">
+                    <div class="card">
+                        <div class="body">
+                            <div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Tasks Assigned</a></li>
+                                   <!-- <li role="presentation"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
+                                    <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>-->
+                                </ul>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                             <div class="row">
+                                                  <div class="col-md-12">
+                                                    <!-- The time line -->
+                                                    <ul class="timeline">
+                                                      <li class="time-label">
+                                                            <span class="bg-green">
+                                                             Completed Task
+                                                            </span>
+                                                      </li>
+                                                      <!-- /.timeline-label -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-end bg-green"></i>
 
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                                         <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                      <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-user bg-aqua"></i>
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-success btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-end bg-green"></i>
 
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                      </h3>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-comments bg-yellow"></i>
+                                                         <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
 
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-success btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                     
+                                                      <!-- timeline time label -->
+                                                      <li class="time-label">
+                                                            <span class="bg-orange">
+                                                              Pending Task
+                                                            </span>
+                                                      </li>
+                                                      <!-- /.timeline-label -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-half bg-orange"></i>
+                                                      <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                      <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline time label -->
-                  <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
-                        </span>
-                  </li>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-camera bg-purple"></i>
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-warning btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-half bg-orange"></i>
 
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                                                         <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                      <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.tab-pane -->
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
 
-             
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
-        </div>
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-warning btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-half bg-orange"></i>
 
-      
+                                                        <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
+
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-warning btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+
+                                                      <li class="time-label">
+                                                            <span class="bg-red">
+                                                              Task on Hold
+                                                            </span>
+                                                      </li>
+                                                      <!-- /.timeline-label -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-o bg-red"></i>
+
+                                                         <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
+
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-danger btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-o bg-red"></i>
+
+                                                         <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
+
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-danger btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline item -->
+                                                      <li>
+                                                        <i class="fa fa-hourglass-o bg-red"></i>
+
+                                                        <div class="timeline-item">
+                                                          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                                                          <h3 class="timeline-header"><a href="#">Operation</a> assign you following task</h3>
+
+                                                          <div class="timeline-body">
+                                                            Take me to your leader!
+                                                            Switzerland is small and neutral!
+                                                            We are more like Germany, ambitious and misunderstood!
+                                                          </div>
+                                                          <div class="timeline-footer">
+                                                            <a class="btn btn-danger btn-flat btn-xs">View Complete Task</a>
+                                                          </div>
+                                                        </div>
+                                                      </li>
+                                                       <li>
+                                                        <i class="fa fa-clock-o bg-gray"></i>
+                                                      </li>
+                                                      <!-- END timeline item -->
+                                                      <!-- timeline time label -->
+                                                      
+                                                    </ul>
+                                                  </div>
+        <!-- /.col -->
       </div>
-      <!-- /.row -->
-
+                                    </div>
+                                 
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
 

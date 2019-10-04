@@ -146,8 +146,8 @@ class ClientController extends Controller
         $create_element = array('name' => $request->input('name'),'ClientOrganization' => $request->input('ClientOrganization'),'country' => $request->input('country'),'region' => $request->input('region'),'address' => $request->input('address'),'email'=> $request->input('email'));
             $create_element['OtherInformation'] = (!empty($request->input('OtherInformation')))?$request->input('OtherInformation'):"";
         $user = Client::create($create_element);        
-        return redirect()->route('clients.index')
-                        ->with('success','Clients created successfully');
+        return redirect()->route('clients.index')->with('message-type', 'success')
+                        ->with('message','Clients created successfully');
     }
     /**
      * Display the specified resource.
@@ -212,8 +212,8 @@ class ClientController extends Controller
         $client->OtherInformation = (!empty($request->input('OtherInformation')))?$request->input('OtherInformation'):"";
         $client->save();
 
-        return redirect()->route('clients.index')
-                        ->with('success','Client updated successfully');
+        return redirect()->route('clients.index')->with('message-type', 'success')
+                        ->with('message','Client updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -224,7 +224,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         DB::table("clients")->where('id',$id)->delete();
-        return redirect()->route('clients.index')
-                        ->with('success','Client deleted successfully');
+        return redirect()->route('clients.index')->with('message-type', 'success')
+                        ->with('message','Client deleted successfully');
     }
 }

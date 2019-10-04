@@ -4,21 +4,16 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
- <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ __('constants.JobOrder_Management') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('constants.Home') }}</a></li>
-        <li >{{ __('constants.JobOrder_Management') }}</li>        
-        <li class="active">{{ __('constants.Edit_User') }}</li>
-      </ol>
-    </section>
+ 
         
     <!-- Main content -->
     <section class="content">
-        <div class="row">
+      <ol class="breadcrumb breadcrumb-bg-orange">
+          <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
+          <li><a href="javascript:void(0);">{{ __('constants.JobOrder_Management') }}</a></li>
+           <li class="active" >{{ __('constants.Edit_JobOrder') }}</li>
+       </ol>
+        <div class="row clearfix">
             <div class="col-lg-12 margin-tb">
                 <!--<div class="pull-left">
                     <h2>Edit New User</h2>
@@ -42,84 +37,163 @@
         @endif
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('constants.Edit_JobOrder') }}</h3>
-            </div>
+            <div class="card" >
+               <div class="header">
+                    <h2>
+                        {{ __('constants.Edit_JobOrder') }}
+                    </h2>
+                    
+                </div>
             <!-- /.box-header -->
             <!-- form start -->
             {!! Form::model($joborder, ['method' => 'PATCH','route' => ['joborders.update', $joborder->id],'files'=>"true"]) !!}
-               <div class="box-body">
-                <div class="form-group">
-                  <label> {{ __('constants.JobOrderNumber') }}</label>
-                  {!! Form::text('job_order_number', null, array('placeholder' => __('constants.JobOrderNumber'),'class' => 'form-control','readonly' => 'readonly' )) !!}
-                </div>
-                <div class="form-group">
-                  <label> {{ __('constants.QuoteNumber') }}</label>
-                    {!! Form::text('quote_number', null, array('placeholder' => __('constants.QuoteNumber'),'class' => 'form-control')) !!}
-                </div>
-                 <div class="form-group">
-                  <label> {{ __('constants.DatOfRequest') }}</label>
-                    {!! Form::date('dat_of_request', null, array('placeholder' => __('constants.DatOfRequest'),'class' => 'form-control')) !!}
-                </div>
-                <div class="form-group">
-                  <label> {{ __('constants.QuoteValue') }}</label>
-                    {!! Form::text('quote_value', null, array('placeholder' => __('constants.QuoteValue'),'class' => 'form-control')) !!}
-                </div>
-                <div class="form-group">
-                  <label> {{ __('constants.Description') }}</label>
-                    {!! Form::textarea('description', null, array('placeholder' => __('constants.Description'),'class' => 'form-control')) !!}
-                </div>
-                <div class="form-group">
-                  <label> {{ __('constants.Location') }}</label>:<br>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label> {{ __('constants.HotelName') }}</label>
-                      {!! Form::text('hotel_name', null, array('placeholder' => __('constants.HotelName'),'class' => 'form-control')) !!}
+               <div class="body">
+                <div class="row clearfix">
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label> {{ __('constants.JobOrderNumber') }}</label>
+                      <div class="form-line">
+                      {!! Form::text('job_order_number', null, array('placeholder' => __('constants.JobOrderNumber'),'class' => 'form-control', 'readonly' => 'readonly' )) !!}
+                      </div>
                     </div>
-                     <div class="col-md-6">
-                      <label> {{ __('constants.City') }}</label>
-                      {!! Form::text('city', null, array('placeholder' => __('constants.City'),'class' => 'form-control')) !!}
+                  </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label> {{ __('constants.QuoteNumber') }}</label>
+                    <div class="form-line">
+                      {!! Form::text('quote_number', null, array('placeholder' => __('constants.QuoteNumber'),'class' => 'form-control')) !!}
                     </div>
-                    <div class="col-md-6">
-                    <label> {{ __('constants.PostCode') }}</label>
-                    {!! Form::text('post_code', null, array('placeholder' => __('constants.PostCode'),'class' => 'form-control')) !!}
-                    </div>
-                    <div class="col-md-6">
-                      <label> {{ __('constants.Address') }}</label>
-                      {!! Form::textarea('address', null, array('placeholder' => __('constants.Address'),'class' => 'form-control')) !!}
-                    </div>
-
                   </div>
                 </div>
+                <div class="col-sm-3">
+                 <div class="form-group">
+                  <label> {{ __('constants.DatOfRequest') }}</label>
+                   <div class="form-line">
+                    {!! Form::date('dat_of_request', null, array('placeholder' => __('constants.DatOfRequest'),'class' => 'form-control')) !!}
+                   </div>
+                </div>
+              </div> 
+               <div class="col-sm-3">             
+                <div class="form-group">
+                  <label> {{ __('constants.QuoteValue') }}</label>
+                  <div class="form-line">
+                    {!! Form::text('quote_value', null, array('placeholder' => __('constants.QuoteValue'),'class' => 'form-control')) !!}
+                  </div>
+                </div>
+              </div>
+              </div>
+                <div class="form-group">
+                  <label> {{ __('constants.Description') }}</label>
+                  <div class="form-line">
+                    {!! Form::text('description', null, array('placeholder' => __('constants.Description'),'class' => 'form-control')) !!}
+                  </div>
+                </div>
+                <div class="row clearfix">
+                   <div class="col-md-4">
+                      <label> {{ __('constants.Location') }}</label>:
+                   </div>
+                </div>
+                <div class="row clearfix">
+                  <div class="form-group">   
+                    <div class="col-md-4">
+                      <label> {{ __('constants.HotelName') }}</label>
+                      <div class="form-line">
+                      {!! Form::text('hotel_name', null, array('placeholder' => __('constants.HotelName'),'class' => 'form-control')) !!}
+                      </div>
+                    </div>
+                     <div class="col-md-4">
+                      <label> {{ __('constants.City') }}</label>
+                      <div class="form-line">
+                      {!! Form::text('city', null, array('placeholder' => __('constants.City'),'class' => 'form-control')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                    <label> {{ __('constants.PostCode') }}</label>
+                      <div class="form-line">
+                      {!! Form::text('post_code', null, array('placeholder' => __('constants.PostCode'),'class' => 'form-control')) !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row clearfix">
+                  <div class="col-md-12">
+                  <div class="form-group">                    
+                      <label> {{ __('constants.Address') }}</label>
+                      <div class="form-line">
+                      {!! Form::text('address', null, array('placeholder' => __('constants.Address'),'class' => 'form-control')) !!}
+                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-3">
                 <div class="form-group">
                   <label > {{ __('constants.HotelContact') }}</label>
+                  <div class="form-line">
                   {!! Form::text('hotel_contact', null, array('placeholder' => __('constants.HotelContact'),'class' => 'form-control')) !!}
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-3">
                 <div class="form-group">
                   <label > {{ __('constants.Scope') }}</label>
+                  <div class="form-line">
                    {!! Form::text('scope', null, array('placeholder' => __('constants.Scope'),'class' => 'form-control')) !!}
+                  </div>
                 </div>
+              </div>
+              <div class="col-md-3">
                 <div class="form-group">
                   <label > {{ __('constants.PoNumber') }}</label>
+                    <div class="form-line">
                    {!! Form::text('po_number', null, array('placeholder' => __('constants.PoNumber'),'class' => 'form-control')) !!}
+                    </div>
                 </div> 
+              </div>
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>{{ __('constants.Country') }}</label>
+                  <div class="form-line">
                   {!! Form::select('country', $countries, null , array('placeholder' => __('constants.Country'),'class' => 'form-control')) !!}
+                  </div>
                 </div> 
-                <div class="form-group">
-                  <label >{{ __('constants.Client_Project_Manager') }}</label>
-                  {!! Form::select('client_pm', $clients, null, array('placeholder' => __('constants.Client_Project_Manager'),'class' => 'form-control')) !!}
+              </div>
+              </div>
+              <div class="row clearfix">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label >{{ __('constants.Client_Project_Manager') }}</label>
+                    <div class="form-line">
+                    {!! Form::select('client_pm', $clients, null, array('placeholder' => __('constants.Client_Project_Manager'),'class' => 'form-control')) !!}
+                    </div>
+                  </div>
                 </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label >{{ __('constants.Service_Description') }}</label>
+                    <div class="form-line">
+                    {!! Form::select('task_id', $tasklist, null, array('placeholder' => __('constants.Service_Description'),'class' => 'form-control')) !!}
+                  </div>            
+                  </div>
+                </div>
+                <div class="col-md-3">
                 <div class="form-group">
-                  <label >{{ __('constants.Service_Description') }}</label>
-                  {!! Form::select('tasklist', $tasklist, null, array('placeholder' => __('constants.Service_Description'),'class' => 'form-control')) !!}
+                  <label >{{ __('constants.Invoiced_Status') }}</label>
+                  <div class="form-line">
+                  {!! Form::select('invoice_status',  array("1" => "INVOICED FULL","2" => "INVOICED 50% UPFRONT","3" => "INVOICED 50% BALANCE"), null, array('placeholder' => __('constants.Invoiced_Status'),'class' => 'form-control')) !!}
+                  </div>                
+                </div>
+                </div>        
+              </div>
+                <div class="box-footer">
+                <button type="submit" class="btn btn-primary">{{ __('constants.Submit') }}</button>
                 </div>
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">{{ __('constants.Submit') }}</button>
-              </div>
+              
+            </div>
             {!! Form::close() !!}
           </div>
 

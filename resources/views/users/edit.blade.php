@@ -2,19 +2,7 @@
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-
- <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ __('constants.User_Management') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>{{ __('constants.Home') }}</a></li>
-        <li >{{ __('constants.User_Management') }}</li>        
-        <li class="active">{{ __('constants.Edit_User') }}</li>
-      </ol>
-    </section>
+<div class="content-wrapper"> 
         
     <!-- Main content -->
     <section class="content">
@@ -24,7 +12,12 @@
                     <h2>Edit New User</h2>
                 </div>-->
                 <div class="pull-left">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> {{ __('constants.Back') }}</a>
+                  @if(Auth::user()['roles'][0]['name'] == 'Admin')
+                     @php $back = route('users.index') @endphp
+                  @else
+                     @php $back = route('users.grid') @endphp
+                  @endif
+                    <a class="btn btn-primary" href="{{ $back }}"> {{ __('constants.Back') }}</a>
                 </div>
             </div>
         </div>
@@ -42,57 +35,80 @@
         @endif
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ __('constants.Edit_User') }}</h3>
-            </div>
+              <div class="card" >
+               <div class="header">
+                    <h2>
+                        {{ __('constants.Edit_User') }}
+                    </h2>
+                    
+                </div>
             <!-- /.box-header -->
             <!-- form start -->
             {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id],'files'=>"true"]) !!}
-              <div class="box-body">
+              <div class="body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">{{ __('constants.Name') }}</label>
+                  <div class="form-line">
                   {!! Form::text('name', null, array('placeholder' => __('constants.Name'),'class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">{{ __('constants.Email') }}</label>
+                  <div class="form-line">
                   {!! Form::text('email', null, array('placeholder' =>  __('constants.Email') ,'class' => 'form-control')) !!}
+                 </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">{{ __('constants.Password') }}</label>
+                  <div class="form-line">
                   {!! Form::password('password', array('placeholder' =>  __('constants.Password') ,'class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">{{ __('constants.Confirm_Password') }}</label>
+                  <div class="form-line">
                   {!! Form::password('confirm-password', array('placeholder' =>  __('constants.Confirm_Password') ,'class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label >Profile Image:</label>
                   {!! Form::file('profile_image', null, array('class' => 'form-control' )) !!}
                   @if($user->profile_image)
-                  <img src="{!! asset('/storage/profile_image/'.$user->profile_image) !!}" class="" ... />
+                  <img src="{!! asset('/storage/profile_image/'.$user->profile_image) !!}"  width='100px' heigth='100px' class="" />
                   @endif
                 </div>
                  <div class="form-group">
                   <label>{{ __('constants.Dob') }}</label>
+                  <div class="form-line">
                     {!! Form::date('dob', null, array('placeholder' =>  __('constants.Dob') ,'class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>{{ __('constants.Employee_Number') }}</label>
+                  <div class="form-line">
                     {!! Form::text('employee_number', null, array('placeholder' => __('constants.Employee_Number'),'class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>{{ __('constants.Department') }}</label>
-                    {!! Form::select('departments[]', $departments,$selectedDepartments, array('class' => 'form-control','multiple')) !!}
+                  <div class="form-line">
+                    {!! Form::select('department', $departments,$selectedDepartments, array('class' => 'form-control')) !!}
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">{{ __('constants.Role') }}</label>
-                  {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+                  <div class="form-line">
+                  {!! Form::select('role', $roles,$userRole, array('class' => 'form-control')) !!}
+                  </div>
                 </div>
+                <div class="box-footer">
+                <button type="submit" class="btn btn-primary">{{ __('constants.Submit') }}</button>
+              </div>
+              </div>
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">{{ __('constants.Submit') }}</button>
-              </div>
+              
             {!! Form::close() !!}
           </div>
 <!--
