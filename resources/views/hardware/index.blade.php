@@ -48,14 +48,14 @@
               <div class="col-md-2">
                   <div class="input-group">
                       <div class="form-line">
-                          <input type="text" id='searchByName' class="form-control date" placeholder="Enter Hardware">
+                          <input type="text" id='searchByHardware' class="form-control date" placeholder="Enter Hardware">
                       </div>
                   </div>
               </div>
               <div class="col-md-2">
                   <div class="input-group">
                       <div class="form-line">
-                          <input type="text" id='searchByEmployeeno' class="form-control date" placeholder="Enter Job Order Number">
+                          <input type="text" id='searchByJobOrder' class="form-control date" placeholder="Enter Job Order Number">
                       </div>
                   </div>
               </div>             

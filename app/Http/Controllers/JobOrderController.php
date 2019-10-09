@@ -390,7 +390,7 @@ class JobOrderController extends Controller
         $delivery_status = (isset($request->delivery_status) && $request->delivery_status == 'on')?1:0;
         $publish_status = (isset($request->publish) && $request->publish == 'on')?1:0;     
 
-        $hardware_element = array('hardware' => $request->hardware,'job_order_number'=> $request->job_order_number,'quantity' => $request->quantity,'configuration_status' => $request->conf_status,'shipped' => $request->shipped, 'delivery_status'=> $delivery_status,'notes'=> $request->notes,'publish'=> $publish_status);
+        $hardware_element = array('hardware_name' => $request->hardware,'job_order_number'=> $request->job_order_number,'quantity' => $request->quantity,'configuration_status' => $request->conf_status,'shipped' => $request->shipped, 'delivery_status'=> $delivery_status,'notes'=> $request->notes,'publish'=> $publish_status);
         Hardware::create($hardware_element);
         JobOrder::where('job_order_number',$request->job_order_number)->update(array('status'=>2));
         if($request->submit == 'submit'){

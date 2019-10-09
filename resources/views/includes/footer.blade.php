@@ -332,14 +332,25 @@ var hardwarecoloumns = [
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
              'data': function(data){
-                // Read values
+              var hardware = $('#searchByHardware').val();
+              data.searchByHardware = hardware;
+
+              var jobOrder = $('#searchByJobOrder').val();
+              data.searchByJobOrder = jobOrder;
+
              }
           },
           'columns': hardwarecoloumns
         });
       }
 
- 
+   $('#searchByHardware').keyup(function(){
+        hardwaretable.draw();
+      });
+   $('#searchByJobOrder').keyup(function(){
+        hardwaretable.draw();
+      });
+
 /********************Hardware portal***************************************/
 
 
@@ -465,9 +476,9 @@ if($('#jobOrderId').length){
            { data: 'actions' },
         ]
       });
-}
-   
+}   
 /********************JobOrder Portal***************************************/
+
 $('.dataTables_filter').hide();
   });
   
