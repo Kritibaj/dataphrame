@@ -9,7 +9,7 @@
         }
     });
 
-    initRealTimeChart();
+    //initRealTimeChart();
     initDonutChart();
     initSparkline();
 });

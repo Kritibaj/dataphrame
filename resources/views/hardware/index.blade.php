@@ -58,7 +58,16 @@
                           <input type="text" id='searchByJobOrder' class="form-control date" placeholder="Enter Job Order Number">
                       </div>
                   </div>
-              </div>             
+              </div>
+              <div class="col-md-2">
+                  <div class="input-group">
+                      <select id='searchByDeliveryst' class="form-control show-tick">
+                         <option value=''> Select Delivery </option>
+                         <option value="1">Delivered</option>                         
+                         <option value="2">Not Delivered</option>
+                      </select>
+                  </div>
+              </div>               
           </div>
        
   <div class="table-responsive"> 

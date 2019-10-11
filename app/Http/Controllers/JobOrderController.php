@@ -73,7 +73,8 @@ class JobOrderController extends Controller
         // }
 
         $count = $jobOrderQuery->count(); 
-        $datas = $jobOrderQuery->get();  
+        $datas = $jobOrderQuery->offset($request->start)
+                ->limit($request->length)->get();  
 
         $result_data = array();
         $current_user_id = Auth::user()->id;

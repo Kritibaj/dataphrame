@@ -91,7 +91,7 @@
 	
 <script>	
 	
-  $(function () {
+$(function () { 
 $("input:checkbox").on('click', function() {
   var $box = $(this); 
   if ($box.is(":checked")) {
@@ -447,8 +447,11 @@ var hardwarecoloumns = [
 /********************Tasklist portal***************************************/   
 
 /********************JobOrder portal***************************************/
-if($('#jobOrderId').length){
+if($('#jobOrderId').length){ 
        var jobOrder = $('#jobOrderId').DataTable({
+        "bLengthChange" : false, //thought this line could hide the LengthMenu
+        "bInfo":false,    
+        "pageLength": 8,
         'processing': true,
         'serverSide': true,
         'serverMethod': 'post',    
@@ -458,8 +461,7 @@ if($('#jobOrderId').length){
             'headers': {
            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-           'data': function(data){             
-
+           'data': function(data){    
 
               var crole = $('#currentrole').val();
               data.currentrole = crole; 
@@ -468,10 +470,6 @@ if($('#jobOrderId').length){
         'columns': [
            { data: 'id' }, 
            { data: 'job_order_number' },
-           { data: 'quote_number' },
-           { data: 'scope' },
-           { data: 'po_number' }, 
-           // { data: 'notes' },          
            { data: 'client_pm' },
            { data: 'actions' },
         ]
