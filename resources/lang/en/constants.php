@@ -34,7 +34,7 @@ return [
         'Task_Management' => 'Task Management',
         'Create_New_Task' => 'Create New Task',
         'Edit_Task' => 'Edit Task',
-        'JobOrder_Management' => 'JobOrder Management',
+        'Job_Orders' => 'Job Orders',
         'Create_New_JobOrder' => 'Create New JobOrder',
         'JobOrderNumber' => 'Job Order Number',
         'QuoteNumber' => 'Quote Number',
@@ -74,5 +74,7 @@ return [
         "Save&AddMore"=>"Save and Add More",
         "Save&InsertCablingModule"=>"Save and Insert Cabling Module",
         "Hardware_Management" => "Hardware Management",
-        "Manage_Hardware" => "Manage Hardware"
+        "Manage_Hardware" => "Manage Hardware",
+        "Open_Jobs" => "OPEN JOBS",
+        "Reports" => "Reports"
 ];

@@ -470,6 +470,9 @@ if($('#jobOrderId').length){
         'columns': [
            { data: 'id' }, 
            { data: 'job_order_number' },
+           { data: 'quote_number' },
+           { data: 'scope' },
+           { data: 'po_number' },
            { data: 'client_pm' },
            { data: 'actions' },
         ]

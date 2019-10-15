@@ -59,7 +59,7 @@
             </div>
             <!-- #END# Widgets -->
             <!-- CPU Usage -->
-            <!-- <div class="row clearfix">
+         <!--  <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="header">
@@ -92,29 +92,28 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>  -->
 
             <div class="row clearfix">
                 <!-- Task Info -->
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+               <!--  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                     <div class="card">
                         <div class="header">
                             <h2>Job Orders</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                </li>
-                            </ul>
+
+                        @if(Auth::user()['roles'][0]['name'] == 'Admin' || Auth::user()['roles'][0]['name'] == 'Operations' || Auth::user()['roles'][0]['name'] == 'Accounts')
+                        <div class="pull-right cjob">
+                            <a class="btn btn-primary" href="{{ route('joborders.create') }}">{{ __('constants.Create_New_JobOrder') }}</a>
+                        </div>
+                        @endif                            
                         </div>
                         <div class="body">
-                             <table id="jobOrderId" class="table table-bordered table-striped">
+                             <table class="table table-bordered table-striped">
                                 <thead>                
                                 <tr>
                                    <th width="5%">{{ __('constants.No') }}</th>
                                    <th width="20%">{{ __('constants.JobOrderNumber') }}</th>
-                                   <th width="35%">{{ __('constants.ClientPm') }}</th>
+                                   <th width="30%">{{ __('constants.ClientPm') }}</th>
                                    <th width="40%">{{ __('constants.Action') }}</th>
                                 </tr>
                                 </thead>
@@ -132,31 +131,17 @@
                              </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- #END# Task Info -->
                 <!-- Browser Usage -->
+               
+                <!-- #END# Browser Usage -->       
+
+                  <!-- #END# CPU Usage -->
+            <div class="row clearfix">
+                <!-- Visitors -->
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="card">
-                        <div class="header">
-                            <h2>BROWSER USAGE</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <div id="donut_chart" class="dashboard-donut-chart"></div>
-                        </div>
-                    </div>
-                     <div class="card">
                         <div class="body bg-pink">
                             <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
                                  data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
@@ -167,26 +152,64 @@
                             <ul class="dashboard-stat-list">
                                 <li>
                                     TODAY
-                                    <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>1 200</b> <small>JOBS</small></span>
                                 </li>
                                 <li>
                                     YESTERDAY
-                                    <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>3 872</b> <small>JOBS</small></span>
                                 </li>
                                 <li>
                                     LAST WEEK
-                                    <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
+                                    <span class="pull-right"><b>26 582</b> <small>JOBS</small></span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- #END# Browser Usage -->               
+                <!-- #END# Visitors -->
+                <!-- Latest Social Trends -->
+                <!-- Latest Social Trends -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="card">
+                        <div class="body job-order-bg">
+                            <div class="m-b--35 create-job-heading font-bold">CREATE JOB ORDERS</div>
+                            <ul class="dashboard-stat-list create-job-orders">
+                                <a href="{{ route('joborders.create') }}">
+                                    <button type="button" class="btn waves-effect" id='add-jobs'>
+                                        <span>Add Jobs</span>
+                                    </button>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Latest Social Trends -->
+                <!-- #END# Latest Social Trends -->
+                <!-- Answered Tickets -->
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="card">
+                        <!-- <div class="header">
+                           <h2>Posted Job Orders</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>-->
+                        <div class="body">
+                            <div id="donut_chart" class="dashboard-donut-chart"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- #END# Answered Tickets -->
+            </div>
+
             </div>
         </div>
-         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                   
-                </div>
+      
     </section>
 
 

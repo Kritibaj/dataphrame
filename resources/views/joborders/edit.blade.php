@@ -19,7 +19,7 @@
                     <h2>Edit New User</h2>
                 </div>-->
                 <div class="pull-left">
-                    <a class="btn btn-primary" href="{{ route('joborders.index') }}"> {{ __('constants.Back') }}</a>
+                    <a class="btn btn-primary" href="{{ route('home') }}"> {{ __('constants.Back') }}</a>
                 </div>
             </div>
         </div>

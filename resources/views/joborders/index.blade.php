@@ -1,4 +1,7 @@
 @extends('layouts.common')
+@section('head_style')
+<link rel="stylesheet" href="{!! asset('themeold/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}">
+@endsection
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -9,7 +12,7 @@
     <section class="content">
          <ol class="breadcrumb breadcrumb-bg-orange">
             <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
-            <li class="active" >{{ __('constants.JobOrder_Management') }}</li>
+            <li class="active" >{{ __('constants.Job_Orders') }}</li>
          </ol>
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -45,7 +48,7 @@
             <div class="card" >
                <div class="header">
                     <h2>
-                        {{ __('constants.JobOrder_Management') }}
+                        {{ __('constants.Job_Orders') }}
                     </h2>                    
                 </div>
             <!-- /.box-header -->

@@ -31,7 +31,7 @@ class JobOrderController extends Controller
     public function ajaxrequestJobOrder(Request $request){
        
         if(Auth::user()['roles'][0]['name'] == 'Admin' || Auth::user()['roles'][0]['name'] == 'Operations' || Auth::user()['roles'][0]['name'] == 'Accounts'){
-
+            
             $jobOrderQuery = JobOrder::select('*','job_orders.id as JobOrderId')->leftJoin('clients',"clients.id","=","job_orders.client_pm");
         }else{
 
@@ -98,7 +98,7 @@ class JobOrderController extends Controller
             }elseif(isset($noti->status) && ($noti->status == 3)){
               $actions.= "<div style='color:red' >Request to delete job Denied</div>"; 
             }else{
-              $actions.= "<div style='color:green' >Request to delete job sent.</div>";  
+              $actions.= "<button type='button' class='btn bg-red waves-effect m-r-20 deletejob'>Request to delete job sent.</button>";  
             }
             if($data->status == 0){
               $actions.= "<button type='button' class='btn btn-info waves-effect m-r-20 deletejob' data-toggle='modal' data-target='#postforexcution' data-job_order_number='".$data->job_order_number."' >Post for Execution</button>";

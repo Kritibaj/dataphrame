@@ -32,7 +32,7 @@ Left Sidebar -->
             </div>
             <!-- #User Info -->
             <!-- Menu -->
-            <div class="menu">
+            <div class="menu" style="background:black;">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
@@ -44,8 +44,8 @@ Left Sidebar -->
                     @role('Admin')
                    <li>
                         <a href="{{ route('users.index') }}">
-                            <i class="material-icons">assignment_ind</i>
-                            <span>{{  __('constants.Manage_Employees') }}</span>
+                            <i class="material-icons clwh">assignment_ind</i>
+                            <span class="clwh" >{{  __('constants.Manage_Employees') }}</span>
                         </a>
                     </li>
                     @endrole
@@ -53,8 +53,8 @@ Left Sidebar -->
                     @if(Auth::user()['roles'][0]['name'] == 'Operations' || Auth::user()['roles'][0]['name'] == 'Accounts')
                     <li>
                         <a href="{{ route('users.grid') }}">
-                            <i class="material-icons">assignment_ind</i>
-                            <span>{{  __('constants.User_Management') }}</span>
+                            <i class="material-icons clwh">assignment_ind</i>
+                            <span class="clwh" >{{  __('constants.User_Management') }}</span>
                         </a>
                     </li>
                     @endif
@@ -69,33 +69,39 @@ Left Sidebar -->
 				   @role('Admin') 
 				   <li>
                         <a href="{{ route('clients.index') }}">
-                            <i class="material-icons">layers</i>
-                            <span>{{  __('constants.Manage_Client') }} </span>
+                            <i class="material-icons clwh">layers</i>
+                            <span class="clwh" >{{  __('constants.Manage_Client') }} </span>
                         </a>
                     </li>
 					@endrole
 					@role('Admin')
 				    <li>
                         <a href="{{ route('tasklists.index') }}">
-                            <i class="material-icons">layers</i>
-                            <span>{{  __('constants.Manage_Task_List') }} </span>
+                            <i class="material-icons clwh">layers</i>
+                            <span class="clwh" >{{  __('constants.Manage_Task_List') }} </span>
                         </a>
                     </li>
 					@endrole
-				    <li>
+				    <!--<li>
                         <a href="{{ route('joborders.index') }}">
                             <i class="material-icons">layers</i>
                             <span>{{  __('constants.Manage_JobOrder') }} </span>
                         </a>
-                    </li>
+                    </li>-->
                     @if(Auth::user()['roles'][0]['name'] == 'Tech Services')
                     <li>
                         <a href="{{ route('hardware.index') }}">
-                            <i class="material-icons">layers</i>
-                            <span>{{  __('constants.Manage_Hardware') }} </span>
+                            <i class="material-icons clwh">layers</i>
+                            <span class="clwh" >{{  __('constants.Manage_Hardware') }} </span>
                         </a>
                     </li>
                     @endif
+                    <li>
+                        <a href="{{ route('hardware.index') }}">
+                            <i class="material-icons clwh">layers</i>
+                            <span class="clwh" >{{  __('constants.Reports') }} </span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

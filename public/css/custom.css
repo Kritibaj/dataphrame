@@ -51,3 +51,53 @@ nav.navbar .container-fluid {
     height: 150px;
     object-fit: cover;
 }
+
+div#jobOrderId_wrapper {
+    height: 585px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+div#jobOrderId_wrapper .row:first-child{
+    display: none;
+}
+
+div.cjob{
+  margin: -23px 0px 9px;  
+}
+
+.clwh{
+    color:white;
+}
+
+
+.create-job-orders{
+   text-align: center;
+}
+
+#add-jobs{
+    width: 150px;
+    height: 150px;
+    border-radius: 159px;
+    font-size: 26px;
+    text-align: center;
+    margin-top: 33px;
+    margin-bottom: 31px;
+    background-color: #a073dd;
+}
+
+.create-job-heading {
+    color: white;
+    font-size: 16px;
+}
+.job-order-bg {
+    background-image: url('/img/job-bg.jpg');
+}
+
+button#add-jobs:hover {
+    width: 160px;
+    height: 160px;
+    border-radius: 159px;
+    margin-bottom: 22px;
+    margin-top: 31px;
+}
