@@ -23,7 +23,7 @@ Route::get('/notificationread', 'JobOrderController@notificationread');
 Route::get('/notificationstatus', 'JobOrderController@notificationstatus');
 Route::get('/shownotification', 'JobOrderController@shownotification');
 Route::get('/insertnotification', 'JobOrderController@insertnotification');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/calendar', 'CalendarController@index')->name('calendar');
 Route::post('/users/ajaxrequestUser', 'UserController@ajaxrequestUser')->name('users.ajaxrequestUser');
 Route::post('/clients/ajaxrequestUser', 'ClientController@ajaxrequestClient')->name('clients.ajaxrequestClient');
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('clients','ClientController');
     Route::resource('users','UserController');
     Route::resource('products','ProductController');
-    Route::resource('tasklists','TasklistController');    
+    Route::resource('tasklists','TasklistController');
     Route::resource('joborders','JobOrderController');
     Route::resource('hardware','HardwareController');
 });
