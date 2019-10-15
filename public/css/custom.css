@@ -63,7 +63,7 @@ div#jobOrderId_wrapper .row:first-child{
 }
 
 div.cjob{
-  margin: -23px 0px 9px;  
+  margin: -23px 0px 9px;
 }
 
 .clwh{
@@ -89,6 +89,7 @@ div.cjob{
 .create-job-heading {
     color: white;
     font-size: 16px;
+    margin-bottom: 228px;
 }
 .job-order-bg {
     background-image: url('/img/job-bg.jpg');
