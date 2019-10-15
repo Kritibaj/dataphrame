@@ -62,12 +62,32 @@
               <div class="col-md-2">
                   <div class="input-group">
                       <select id='searchByDeliveryst' class="form-control show-tick">
-                         <option value=''> Select Delivery </option>
-                         <option value="1">Delivered</option>                         
-                         <option value="2">Not Delivered</option>
+                         <option value=''>{{ __('constants.SelectDelivery') }}</option>
+                         <option value="1">{{ __('constants.Delivered') }}</option>                         
+                         <option value="0">{{ __('constants.NotDelivered') }}</option>
                       </select>
                   </div>
-              </div>               
+              </div>   
+              <div class="col-md-2">
+                  <div class="input-group">
+                      <select id='searchByConfigstatus' class="form-control show-tick">
+                         <option value=''>{{ __('constants.Configuration_Status') }}</option>
+                         <option value="2">{{ __('constants.Ready') }}</option>                         
+                         <option value="1">{{ __('constants.InProgress') }}</option>                                              
+                         <option value="0">{{ __('constants.NotReady') }}</option>
+                      </select>
+                  </div>
+              </div> 
+              <div class="col-md-2">
+                  <div class="input-group">
+                      <select id='searchByShippedForDeployement' class="form-control show-tick">
+                         <option value=''>{{ __('constants.Shipped_Deployement') }}</option>
+                         <option value="2">{{ __('constants.Ready') }}</option>                         
+                         <option value="1">{{ __('constants.InProgress') }}</option>                                              
+                         <option value="0">{{ __('constants.NotReady') }}</option>
+                      </select>
+                  </div>
+              </div>             
           </div>
        
   <div class="table-responsive"> 

@@ -67,9 +67,8 @@ div.cjob{
 }
 
 .clwh{
-    color:white;
+    color:white !important;
 }
-
 
 .create-job-orders{
    text-align: center;

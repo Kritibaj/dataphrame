@@ -12,7 +12,7 @@
     <section class="content">
          <ol class="breadcrumb breadcrumb-bg-orange">
             <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
-            <li class="active" >{{ __('constants.Job_Orders') }}</li>
+            <li class="active" >{{ __('constants.Manage_JobOrder') }}</li>
          </ol>
     <div class="row">
         <div class="col-lg-12 margin-tb">

@@ -10,7 +10,7 @@
     <section class="content">
        <ol class="breadcrumb breadcrumb-bg-orange">
           <li><a href="javascript:void(0);">{{ __('constants.Home') }}</a></li>
-          <li><a href="javascript:void(0);">{{ __('constants.JobOrder_Management') }}</a></li>
+          <li><a href="javascript:void(0);">{{ __('constants.Manage_JobOrder') }}</a></li>
            <li class="active" >{{ __('constants.Create_New_JobOrder') }}</li>
        </ol>
         <div class="row">

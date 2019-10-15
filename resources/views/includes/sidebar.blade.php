@@ -1,4 +1,4 @@
-Left Sidebar -->
+<!--Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
             <div class="user-info">
@@ -37,8 +37,8 @@ Left Sidebar -->
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
                         <a href="{{ route('home') }}">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
+                            <i class="material-icons clwh">home</i>
+                            <span class="clwh" >Home</span>
                         </a>
                     </li>
                     @role('Admin')
@@ -96,12 +96,12 @@ Left Sidebar -->
                         </a>
                     </li>
                     @endif
-                    <li>
+                   <!--  <li>
                         <a href="{{ route('hardware.index') }}">
                             <i class="material-icons clwh">layers</i>
                             <span class="clwh" >{{  __('constants.Reports') }} </span>
                         </a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>

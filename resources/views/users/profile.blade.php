@@ -32,7 +32,7 @@
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
                             <div class="image-area">
-                                <img src="/Dataphrame/public/storage/profile_image/{{ $user->profile_image }}" alt="AdminBSB - Profile Image" />
+                                <img src="/storage/profile_image/{{ $user->profile_image }}" alt="AdminBSB - Profile Image" />
                             </div>
                             <div class="content-area">
                                 <h3>{{ $user->name }}</h3>
