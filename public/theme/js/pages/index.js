@@ -68,25 +68,25 @@ function initSparkline() {
     });
 }
 
-function initDonutChart() {
-    Morris.Donut({
-        element: 'donut_chart',
-        data: [{
-            label: 'Not posted Jobs',
-            value: 37
-        }, {
-            label: 'Posted Jobs',
-            value: 30
-        }, {
-            label: 'Execution Stated',
-            value: 18
-        }],
-        colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)'],
-        formatter: function (y) {
-            return y + '%'
-        }
-    });
-}
+// function initDonutChart() {
+//     Morris.Donut({
+//         element: 'donut_chart',
+//         data: [{
+//             label: 'Not posted Jobs',
+//             value: 37
+//         }, {
+//             label: 'Posted Jobs',
+//             value: 30
+//         }, {
+//             label: 'Execution Stated',
+//             value: 18
+//         }],
+//         colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)'],
+//         formatter: function (y) {
+//             return y + '%'
+//         }
+//     });
+// }
 
 var data = [], totalPoints = 110;
 function getRandomData() {
