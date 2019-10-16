@@ -75,16 +75,24 @@ class HomeController extends Controller
         foreach($jobsdata as $jgraph){
            $create = strtotime($jgraph->date);
 
-
+            $isGraph = false;
           // echo 'm='.$m.'db'.$create.'<br>';
             if( $t <= $create){
                  $today = $today + $jgraph->views;
-                 array_push($cdata,$jgraph->views);
-            }else if( $w < $create){
+                 $isGraph = true;
+                 //array_push($cdata,$jgraph->views);
+            }
+            if( $w < $create){
                 $week = $week + $jgraph->views;
-                array_push($cdata,$jgraph->views);
-            }else if( $m < $create){
+                $isGraph = true;
+                //array_push($cdata,$jgraph->views);
+            }
+            if( $m < $create){
                 $mdata=$mdata + $jgraph->views;
+                $isGraph = true;
+                //array_push($cdata,$jgraph->views);
+            }
+            if($isGraph){
                 array_push($cdata,$jgraph->views);
             }
         }
