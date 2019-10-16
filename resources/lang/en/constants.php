@@ -76,5 +76,12 @@ return [
         "Hardware_Management" => "Hardware Management",
         "Manage_Hardware" => "Manage Hardware",
         "Open_Jobs" => "OPEN JOBS",
-        "Reports" => "Reports"
+        "Reports" => "Reports",
+        "InProgress" => "In Progress",
+        "SelectDelivery" => "Select Delivery",
+        "Delivered" => "Delivered",
+        "NotDelivered" => "Not Delivered",
+        "Ready" => "Ready",
+        "NotReady" => "Not Ready",
+        "Shipped_Deployement" => "Shipped Deployement"
 ];

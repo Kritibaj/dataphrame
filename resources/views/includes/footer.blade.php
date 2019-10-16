@@ -338,6 +338,14 @@ var hardwarecoloumns = [
               var jobOrder = $('#searchByJobOrder').val();
               data.searchByJobOrder = jobOrder;
 
+               var deliveryst = $('#searchByDeliveryst').val();
+              data.searchByDeliveryst = deliveryst;
+
+               var configst = $('#searchByConfigstatus').val();
+              data.searchByConfigstatus = configst;
+
+              var shipped_for_deployement = $('#searchByShippedForDeployement').val();
+              data.searchByShippedForDeployement = shipped_for_deployement;
              }
           },
           'columns': hardwarecoloumns
@@ -348,6 +356,15 @@ var hardwarecoloumns = [
         hardwaretable.draw();
       });
    $('#searchByJobOrder').keyup(function(){
+        hardwaretable.draw();
+      });
+   $('#searchByDeliveryst').change(function(){
+        hardwaretable.draw();
+      });
+   $('#searchByConfigstatus').change(function(){
+        hardwaretable.draw();
+      });
+   $('#searchByShippedForDeployement').change(function(){
         hardwaretable.draw();
       });
 

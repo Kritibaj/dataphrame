@@ -25,11 +25,21 @@ class HardwareController extends Controller
         if(isset($request->searchByJobOrder) && !empty($request->searchByJobOrder)){
             $hardwareQuery->where('job_order_number','like', '%' .$request->searchByJobOrder.'%');
         }
+        if(isset($request->searchByDeliveryst)){ 
+            $hardwareQuery->where('delivery_status','=', $request->searchByDeliveryst);
+        }
+        if(isset($request->searchByConfigstatus)){ 
+            $hardwareQuery->where('configuration_status','=', $request->searchByConfigstatus);
+        }
+        if(isset($request->searchByShippedForDeployement)){ 
+            $hardwareQuery->where('shipped','=', $request->searchByShippedForDeployement);
+        }
 
         $result_data = array();
 
 		$count =  $hardwareQuery->count();
-		$datas = $hardwareQuery->get();
+		$datas = $hardwareQuery->offset($request->start)
+                ->limit($request->length)->get();
 		foreach($datas as $data){	
 
 			if($data->configuration_status == 2){
